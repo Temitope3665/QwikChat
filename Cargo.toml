@@ -1,0 +1,17 @@
+[package]
+name = "rust-next-chat"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix = "0.13"
+actix-web = "4"
+actix-files = "0.6"
+actix-cors = "0.6"
+actix-web-actors = "4"
+diesel = { version = "2.1.0", features = ["sqlite", "r2d2", "chrono", "uuid"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.8"

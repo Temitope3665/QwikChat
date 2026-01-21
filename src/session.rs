@@ -31,6 +31,7 @@ pub enum ChatType {
     TEXT,
     CONNECT,
     DISCONNECT,
+    JOIN,
 }
 #[derive(Serialize, Deserialize)]
 struct ChatMessage {
@@ -134,6 +135,13 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
                             msg,
                             room: self.room.clone(),
                         })
+                    }
+                    ChatType::JOIN => {
+                        self.room = input.room_id.clone();
+                        self.addr.do_send(server::Join {
+                            id: self.id,
+                            name: self.room.clone(),
+                        });
                     }
                     _ => {}
                 }

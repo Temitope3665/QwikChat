@@ -1,0 +1,10 @@
+target
+.dockerignore
+Dockerfile
+.git
+.gitignore
+frontend/node_modules
+frontend/.next
+node_modules
+*.db
+*.db-journal

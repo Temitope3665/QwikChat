@@ -19,10 +19,10 @@ mod session;
 async fn main() -> std::io::Result<()> {
     // get server connection
     let server = server::ChatServer::new().start();
-    let conn_spec = "chat.db";
+    let conn_spec = std::env::var("DATABASE_URL").unwrap_or_else(|_| "chat.db".to_string());
     let manager = ConnectionManager::<SqliteConnection>::new(conn_spec);
     let pool = r2d2::Pool::builder().build(manager).expect("Failed to create pool");
-    let server_addr = "127.0.0.1";
+    let server_addr = "0.0.0.0";
     let server_port = 8080;
     
     let app = HttpServer::new(move || {
